@@ -63,6 +63,11 @@ elif points<55:
 else:
     print("you have high level of stress")
 
+if yesnoques("Do you want to take a depression self-assessment?")=='y':
+    depression()
+else:
+    print("thank you for taking this quiz")
+
 
 def depression():
     print("This is the depression self-assessment.")
