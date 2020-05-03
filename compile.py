@@ -63,18 +63,18 @@ elif points<55:
 else:
     print("you have high level of stress")
 
-if yesnoques("Do you want to take a depression self-assessment?")=='y':
-    depression()
-else:
-    print("thank you for taking this quiz")
-
-
 def depression():
     print("This is the depression self-assessment.")
     q21=yesnoques("Do you often feel down, depressed, or hopeless?")
     q22=yesnoques("Do you lack interest in activities, hobbies, and what is happening around you?")
     if q21=='y' or q22=='y':
         print("Further assessment is needed from you.")
+
+if yesnoques("Do you want to take a depression self-assessment?")=='y':
+    depression()
+else:
+    print("thank you for taking this quiz")
+
 
 def selfharm():
     print("This is the suicide - self harm self-assessment. Please answer y/n to following questions.")
@@ -89,3 +89,18 @@ def selfharm():
     if q31=="y" or q32=="y" or q34=="y":
         print("Please seek immediate attention from a trained clinician.")
 #what happens if patient answer "no" to the questions??
+
+def gethospital():
+    import csv
+    h_info=list(csv.DictReader(open('Hospital_General_Information.csv','r'),delimiter=','))
+    statename=input("What state are currently residing?")
+    samestate=[s for s in h_info if s['State']==statename]
+    return samestate
+
+def printHosList(hs):
+    print('Here is a list of hospitals in your state of residence.')
+    for h in hs:
+        print(h['Facility Name'],'in',h['Address']+','+h['City']+','+h['State']+','+h['ZIP Code'])
+
+if yesnoques("Would you like to learn about hospitals in your area?")=='y':
+    printHosList(gethospital())
